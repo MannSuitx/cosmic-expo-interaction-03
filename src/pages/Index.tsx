@@ -5,7 +5,7 @@ import RegistrationForm from "@/components/RegistrationForm";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-expo-black">
+    <div className="min-h-screen bg-expo-black scroll-smooth">
       <Navbar />
       <Hero />
       <CategoryCards />
