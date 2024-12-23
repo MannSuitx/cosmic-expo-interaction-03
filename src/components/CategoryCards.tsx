@@ -5,7 +5,7 @@ interface Category {
   id: number;
   name: string;
   description: string;
-  icon: string;
+  image: string;
   gradient: string;
 }
 
@@ -14,28 +14,28 @@ const categories: Category[] = [
     id: 1,
     name: "Food",
     description: "Experience culinary innovations and gastronomic delights",
-    icon: "🍽️",
+    image: "/food-stall.jpg",
     gradient: "from-[#FF6B6B] via-[#FFE66D] to-[#FF6B6B]",
   },
   {
     id: 2,
     name: "Fun",
     description: "Discover exciting entertainment and interactive experiences",
-    icon: "🎮",
+    image: "/fun-zone.jpg",
     gradient: "from-[#4E65FF] via-[#92EFFD] to-[#4E65FF]",
   },
   {
     id: 3,
     name: "Gaming",
     description: "Explore the latest in gaming technology and virtual worlds",
-    icon: "🎮",
+    image: "/gaming-zone.jpg",
     gradient: "from-[#A17FE0] via-[#5D26C1] to-[#A17FE0]",
   },
   {
     id: 4,
     name: "InfoTech",
     description: "Discover cutting-edge technology and digital innovations",
-    icon: "💻",
+    image: "/tech-zone.jpg",
     gradient: "from-[#00F5A0] via-[#00D9F5] to-[#00F5A0]",
   },
 ];
@@ -89,12 +89,16 @@ const CategoryCards = () => {
                 className="relative h-full group"
               >
                 <div className={`absolute inset-0 bg-gradient-to-r ${category.gradient} opacity-20 group-hover:opacity-30 rounded-xl transition-opacity duration-300`} />
-                <div className="relative bg-expo-purple/40 backdrop-blur-lg rounded-xl p-6 border border-white/10">
+                <div className="relative bg-expo-purple/40 backdrop-blur-lg rounded-xl p-6 border border-white/10 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/0 rounded-xl" />
                   <div className="relative z-10">
-                    <span className="text-4xl mb-4 block transform group-hover:scale-110 transition-transform duration-300">
-                      {category.icon}
-                    </span>
+                    <div className="w-full h-48 mb-4 overflow-hidden rounded-lg">
+                      <img 
+                        src={category.image} 
+                        alt={category.name}
+                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
+                      />
+                    </div>
                     <h3 className="text-2xl font-bold text-white mb-2">{category.name}</h3>
                     <p className="text-gray-300">{category.description}</p>
                     
