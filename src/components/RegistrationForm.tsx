@@ -8,6 +8,7 @@ const categories = ["InfoTech", "Gaming", "Food", "Fun"];
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     stallName: "",
+    stallNumber: "",
     category: "",
     description: "",
     price: "",
@@ -26,16 +27,13 @@ const RegistrationForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      // Generate a random stall number
-      const stallNumber = `S${Math.floor(Math.random() * 1000)}`;
-      
       const { error } = await supabase.from("stalls").insert({
         stall_name: formData.stallName,
+        stall_number: formData.stallNumber,
         category: formData.category,
         description: formData.description,
         price: parseFloat(formData.price),
         members: formData.members.filter(member => member !== ""),
-        stall_number: stallNumber,
       });
 
       if (error) throw error;
@@ -44,6 +42,7 @@ const RegistrationForm = () => {
       // Reset form
       setFormData({
         stallName: "",
+        stallNumber: "",
         category: "",
         description: "",
         price: "",
@@ -87,6 +86,18 @@ const RegistrationForm = () => {
                 type="text"
                 value={formData.stallName}
                 onChange={(e) => setFormData({ ...formData, stallName: e.target.value })}
+                className="w-full px-4 py-2 rounded-lg bg-expo-black/50 text-white border border-expo-cyan/20 focus:border-expo-cyan focus:outline-none backdrop-blur-md"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-white font-['Akira_Expanded'] text-sm mb-2">Stall Number</label>
+              <input
+                type="text"
+                value={formData.stallNumber}
+                onChange={(e) => setFormData({ ...formData, stallNumber: e.target.value })}
+                placeholder="Enter stall number (e.g., S123)"
                 className="w-full px-4 py-2 rounded-lg bg-expo-black/50 text-white border border-expo-cyan/20 focus:border-expo-cyan focus:outline-none backdrop-blur-md"
                 required
               />
