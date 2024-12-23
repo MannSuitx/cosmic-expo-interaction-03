@@ -1,6 +1,6 @@
 import Hero from "@/components/Hero";
 import CategoryCards from "@/components/CategoryCards";
-import StallsSection from "@/components/StallsSection";
+import RegisteredStalls from "@/components/RegisteredStalls";
 import RegistrationForm from "@/components/RegistrationForm";
 
 const Index = () => {
@@ -8,7 +8,7 @@ const Index = () => {
     <main className="min-h-screen bg-expo-black">
       <Hero />
       <CategoryCards />
-      <StallsSection />
+      <RegisteredStalls />
       <RegistrationForm />
     </main>
   );

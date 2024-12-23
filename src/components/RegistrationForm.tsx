@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const categories = ["InfoTech", "Gaming", "Food", "Fun"];
 
@@ -10,13 +11,49 @@ const RegistrationForm = () => {
     category: "",
     description: "",
     price: "",
-    members: Array(8).fill(""), // Increased to 8 members
+    memberCount: "6", // Default to 6 members
+    members: Array(6).fill(""),
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleMemberCountChange = (count: string) => {
+    setFormData({
+      ...formData,
+      memberCount: count,
+      members: Array(parseInt(count)).fill(""),
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    toast.success("Registration submitted successfully!");
+    try {
+      // Generate a random stall number
+      const stallNumber = `S${Math.floor(Math.random() * 1000)}`;
+      
+      const { error } = await supabase.from("stalls").insert({
+        stall_name: formData.stallName,
+        category: formData.category,
+        description: formData.description,
+        price: parseFloat(formData.price),
+        members: formData.members.filter(member => member !== ""),
+        stall_number: stallNumber,
+      });
+
+      if (error) throw error;
+      
+      toast.success("Registration submitted successfully!");
+      // Reset form
+      setFormData({
+        stallName: "",
+        category: "",
+        description: "",
+        price: "",
+        memberCount: "6",
+        members: Array(6).fill(""),
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Failed to submit registration");
+    }
   };
 
   const handleMemberChange = (index: number, value: string) => {
@@ -27,7 +64,6 @@ const RegistrationForm = () => {
 
   return (
     <section id="register" className="py-20 bg-expo-black relative overflow-hidden">
-      {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-expo-purple/20 via-expo-black to-expo-black">
         <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
       </div>
@@ -93,6 +129,18 @@ const RegistrationForm = () => {
                 className="w-full px-4 py-2 rounded-lg bg-expo-black/50 text-white border border-expo-cyan/20 focus:border-expo-cyan focus:outline-none backdrop-blur-md"
                 required
               />
+            </div>
+
+            <div>
+              <label className="block text-white font-['Akira_Expanded'] text-sm mb-2">Number of Team Members</label>
+              <select
+                value={formData.memberCount}
+                onChange={(e) => handleMemberCountChange(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg bg-expo-black/50 text-white border border-expo-cyan/20 focus:border-expo-cyan focus:outline-none backdrop-blur-md"
+              >
+                <option value="6">6 Members</option>
+                <option value="8">8 Members</option>
+              </select>
             </div>
 
             <div>
