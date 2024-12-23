@@ -3,7 +3,7 @@ import StallCard, { StallInfo } from "./StallCard";
 
 const stalls: StallInfo[] = [
   {
-    id: "1",  // Changed from number to string
+    id: "1",
     name: "TechVision Hub",
     stallNumber: "A101",
     category: "InfoTech",
@@ -12,7 +12,7 @@ const stalls: StallInfo[] = [
     members: ["John Doe", "Jane Smith", "Mike Johnson", "Sarah Wilson"],
   },
   {
-    id: "2",  // Changed from number to string
+    id: "2",
     name: "Gaming Paradise",
     stallNumber: "B202",
     category: "Gaming",
@@ -21,7 +21,7 @@ const stalls: StallInfo[] = [
     members: ["Alex Brown", "Chris Lee", "Emma Davis", "Tom Wilson"],
   },
   {
-    id: "3",  // Changed from number to string
+    id: "3",
     name: "Foodie's Corner",
     stallNumber: "C303",
     category: "Food",
@@ -30,7 +30,7 @@ const stalls: StallInfo[] = [
     members: ["David Chen", "Maria Garcia", "James Wilson", "Lisa Anderson"],
   },
   {
-    id: "4",  // Changed from number to string
+    id: "4",
     name: "Fun Zone",
     stallNumber: "D404",
     category: "Fun",
