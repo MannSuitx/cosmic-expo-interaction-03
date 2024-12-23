@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 
 export interface StallInfo {
-  id: number;
-  name: string;
-  stallNumber: string;
+  id: string;  // Changed from number to string to match Supabase UUID
+  name: string;  // Renamed from stall_name
+  stallNumber: string;  // Renamed from stall_number
   category: string;
   price: number;
   description: string;

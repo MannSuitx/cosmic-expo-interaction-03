@@ -14,7 +14,17 @@ const RegisteredStalls = () => {
         .order("created_at", { ascending: false });
       
       if (error) throw error;
-      return data as StallInfo[];
+      
+      // Map Supabase data to StallInfo type
+      return data?.map(stall => ({
+        id: stall.id,
+        name: stall.stall_name,
+        stallNumber: stall.stall_number,
+        category: stall.category,
+        price: stall.price,
+        description: stall.description,
+        members: stall.members
+      })) as StallInfo[];
     },
   });
 
