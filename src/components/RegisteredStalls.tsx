@@ -11,6 +11,7 @@ const RegisteredStalls = () => {
       const { data, error } = await supabase
         .from("stalls")
         .select("*")
+        .eq('is_approved', true)  // Re-enable approved stalls filter
         .order("created_at", { ascending: false });
       
       if (error) throw error;
@@ -62,7 +63,7 @@ const RegisteredStalls = () => {
             Registered <span className="text-expo-cyan">Stalls</span>
           </h2>
           <p className="text-gray-300 max-w-2xl mx-auto">
-            Explore our diverse range of registered stalls featuring the latest in technology,
+            Explore our diverse range of approved stalls featuring the latest in technology,
             gaming, food, and entertainment.
           </p>
         </motion.div>
